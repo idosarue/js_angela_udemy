@@ -1,0 +1,26 @@
+
+#img {
+    border-radius: 50%;
+    height: 200px;
+}
+a {
+    text-decoration: none;
+}
+body {
+    background-color: #EAF6F6;
+}
+hr {
+    
+    border-style: dotted none none none;
+    border-top: 5px dotted  grey;   
+    width: 10%;
+    opacity: 0.3;
+}
+
+h1{
+    color:#39a9cb ;
+}
+h3{
+    color:#66bfbf ;
+
+}

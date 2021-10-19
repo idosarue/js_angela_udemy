@@ -1,0 +1,15 @@
+function isLeap(year) {
+    
+/**************Don't change the code above****************/    
+  var checkOne = Number.isInteger(year / 4);
+  var checkTwo = Number.isInteger(year / 100);
+  var checkthree = Number.isInteger(year / 400);
+    if (checkOne === true && checkTwo === false){
+        console.log("Leap year.");
+    }else{
+        console.log("Not leap year.")
+    }
+    
+  
+}
+isLeap(2020);

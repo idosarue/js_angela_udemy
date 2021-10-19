@@ -1,0 +1,30 @@
+function lifeInWeeks(age) {
+    
+/************Don't change the code above************/    
+    
+    //Write your code here.
+  // var age = prompt("age");
+  
+  var year = 365; 
+  var month = 12;
+  var week = 52;
+  var userAge = age * year; 
+  var userMonth = age * month;
+  var userWeek = age * week;
+  
+  var maxAge = 90;
+  var maxYear = maxAge * year;
+  var maxWeek = week * maxAge ;
+  var maxMonth = month * maxAge;
+  
+  var dayLeft = maxYear - userAge;
+  var monthLeft = maxMonth - userMonth;
+  var weekLeft = maxWeek - userWeek;
+
+  
+  console.log("You have " + dayLeft + " days, " + weekLeft + " weeks, and " + monthLeft + " months left.");
+
+ 
+/*************Don't change the code below**********/
+}
+lifeInWeeks()

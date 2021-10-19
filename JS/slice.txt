@@ -1,0 +1,6 @@
+var maxLength = 140;
+var userTweet = prompt("Hello! enter your tweet:")
+var left = maxLength - userTweet.length;
+var slice = userTweet.slice(0,141);
+alert("you have written " + userTweet.length + " characters, you have " + left + " left");
+alert(slice);

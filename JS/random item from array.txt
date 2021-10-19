@@ -1,0 +1,13 @@
+
+function whosPaying(names){
+    names= ['Angela', 'Ben', 'Jenny', 'Michael', 'Chloe'];
+    var ran = Math.round(Math.random() * (names.length-1) );
+    return names[ran] + ' is going to buy lunch today!';
+
+
+    
+}
+
+whosPaying();
+
+
