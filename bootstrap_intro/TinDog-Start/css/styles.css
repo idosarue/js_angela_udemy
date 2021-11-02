@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
+
+body {
+    font-family: 'Montserrat';
+
+}
+
+#title {
+    background-color: #ff4c68;
+}
+
+.container-fluid {
+    padding: 3% 15%;
+}
+
+h1 {
+    font-size: 3.5rem;
+    line-height: 1.5;
+    color: white;
+}
+
+/* navbar */
+
+.navbar {
+    padding: 0 0 100px;
+}
+
+.navbar-brand, .nav-item {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.navbar-brand{
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.nav-item {
+    padding: 0 18px;
+}
+
+.nav-link {
+    font-size: 1.2rem;
+}
+
+/* Download Buttons */
+
+.download-button {
+    margin: 5% 3% 5% 0;
+}
+
+/* Title Image */
+
+.title-image {
+    width: 60%;
+    transform: rotate(25deg);
+}
+
+/* features */
+
+#features {
+    padding: 120px 0 120px;
+}
+
+.feature-con {
+    text-align: center;
+    padding-bottom: 50px;
+}
+
+.feature-con i {
+    font-size: 4rem;
+    color: tomato;
+    margin-bottom: 10px;
+}
+
+.feature-con i:hover {
+    color: #ff4c68;
+}
+
+.feature-con h3 {
+    font-size: 1.5rem;
+}
+
+.feature-con p {
+    color: #818181;
+    font-family: 'Montserrat';
+    font-size: .8rem;
+}
