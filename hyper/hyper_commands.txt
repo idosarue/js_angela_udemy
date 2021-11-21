@@ -1,0 +1,7 @@
+**to list hidden file: ls -a
+** ro create hidden: .FileName
+** to add new line echo "content" >> filename.txt
+rm to remove files
+cd~ to go back to root
+rm * to remove all files
+rm -r to remove directory
