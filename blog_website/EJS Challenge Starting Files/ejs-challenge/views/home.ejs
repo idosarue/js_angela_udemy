@@ -1,0 +1,16 @@
+<%- include('partials/header'); -%>
+<h1>
+  Home
+</h1>
+
+<p><%= homeStartingContent %>... </p>
+<% for(let post in posts) { %>
+    <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><%= posts[post].title%></h5>
+          <p class="card-text"><%= posts[post].postBody.substring(0,50) %>...</p>
+          <a href=<%= "/post/" + post %> class="btn btn-primary">Full Post</a>
+        </div>
+    </div>
+<% } %> 
+<%- include('partials/footer'); -%>
