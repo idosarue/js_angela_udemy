@@ -1,0 +1,35 @@
+<%- include('header'); -%>
+    <div class="box" id="heading">
+        <h1><%= listTitle %></h1>
+    </div>    
+
+    <a href="/">Home</a>
+    <a href="/work">Work</a>
+    
+    <% if(typeof alert != 'undefined') { %>
+        <% alert.forEach(function(error) { %>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <%= error.msg %>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+        <% }) %>
+    <% } %>
+
+
+   <div class="box">
+        <% for(let task in tasks) { %>
+            <div class="item">
+                <input type="checkbox" name="" id="">
+                <p class='item'><%= tasks[task] %></p>
+            </div>
+        <% } %>
+
+        <form class="item" action="/work" method="post">
+            <input name="task" type="text" name="" id="" placeholder="New Item" autocomplete="off">
+            <button name="list" type="submit">+</button>
+        </form>
+   </div>
+
+<%- include('footer'); -%>
