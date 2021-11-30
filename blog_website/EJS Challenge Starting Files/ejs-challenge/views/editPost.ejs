@@ -1,5 +1,14 @@
 <%- include('partials/header'); -%>
-<h1>post</h1>
+<h1>Edit Post</h1>
+
+<% if(typeof alert != 'undefined') { %>
+    <% alert.forEach(function(error) { %>
+          <p class="alert alert-warning" role="alert">
+            <%= error.msg %>
+          </p>
+    <% }) %>
+<% } %>
+
     <form action=<%= "/post/" + postId %> method="post">
         <div class="mb-3">
             <label for="title">Title</label>

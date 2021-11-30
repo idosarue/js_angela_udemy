@@ -6,7 +6,7 @@
           <h5 class="card-title"><%= post.title%></h5>
           <p class="card-text"><%= post.postBody %></p>
           <a href=<%= "/editPost/" + postId %> class="btn btn-primary">Edit</a>
-          <a onclick="confirmDelete()" href=<%= "/deletePost/" + postId %> class="btn btn-danger">Delete</a>
+          <a id="delete-button" href='#' data-id=<%= postId %> class="btn btn-danger">Delete</a>
         </div>
     </div>
 </div>
