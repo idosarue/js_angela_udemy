@@ -26,4 +26,51 @@ const dbPassword = process.env.DB_PASSWORD
 // // mongoose
 mongoose.connect("mongodb://localhost:27017/fruitsDB")
 
-// const fruitSchema = new mongoose.Schema
+const fruitSchema = new mongoose.Schema({
+    name: String,
+    rating: Number,
+    review: String
+})
+
+const Fruit = mongoose.model("Fruit", fruitSchema)
+
+const fruit = new Fruit ({
+    name : "Apple",
+    rating : 7,
+    review: "Solid"
+})
+const banana = new Fruit ({
+    name : "banana",
+    rating : 7,
+    review: "Solid"
+})
+const kiwi = new Fruit ({
+    name : "Kiwi",
+    rating : 7,
+    review: "Solid"
+})
+
+const personSchema = new mongoose.Schema({
+    name: String,
+    age: Number
+})
+
+
+const Person = mongoose.model("People", personSchema)
+
+const person = new Person ({
+    name : 'John',
+    age : 36
+})
+
+// Save multiple
+Fruit.insertMany([kiwi, banana], (err) => {
+    if (err) {
+        console.log(err)
+    }else {
+        console.log("Succesfully inserted many!")
+    }
+})
+
+// save one instance
+// person.save()
