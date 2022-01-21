@@ -1,6 +1,10 @@
 //jshint esversion:6
 
 const fs = require('fs')
-// fs.copyFileSync('text1.txt', 'text2.txt')
+
+// copy files
+fs.copyFileSync('text1.txt', 'text2.txt')
+
+// superheroes api
 const superheroes = require('superheroes');
 console.log(superheroes.random())

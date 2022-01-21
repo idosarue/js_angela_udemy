@@ -1,0 +1,2 @@
+-create new branch: git branch <NAME>
+-see available branches: git branch
