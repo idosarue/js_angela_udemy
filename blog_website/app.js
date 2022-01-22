@@ -18,87 +18,49 @@ app.set('view engine', 'ejs');
 app.use(urlencodedParser);
 app.use(express.static("public"));
 
-let posts = []
+// Console
+const log = console.log.bind(console, 'app')
+// Posts
+const posts = []
+
 
 app.get('/', (req, res) => {
-  res.render('home', {homeStartingContent : homeStartingContent.substring(0,50), posts : posts})
-})
-
-app.get('/post/:postId', (req, res) => {
-  const postId = req.params.postId
-  if (posts.length >= postId ) {
-    res.render('post', {post : posts[postId], postId : postId})
-  }else {
-    res.redirect('/')
-  }
-})
-
-app.get('/editPost/:postId', (req, res) => {
-  const postId = req.params.postId
-  if (posts.length >= postId ) {
-    res.render('editPost', {post : posts[postId], postId : postId})
-  }else {
-    res.redirect('/')
-  }
-})
-
-
-app.post('/post/:postId', urlencodedParser, [
-  check('title', 'The title must be 3+ characters long').exists().isLength({min: 3}),
-  check('postBody', 'The content must be 3+ characters long').exists().isLength({min: 3})
-], (req, res) => {
-  const errors = validationResult(req)
-  const postId = req.params.postId
-  let post = posts[postId]
-  if (!errors.isEmpty()){
-    const alert = errors.array()
-    res.render('editPost', {alert, post : post, postId : postId})
-  }else {
-    post.title = req.body.title
-    post.postBody = req.body.postBody
-    res.redirect('/')
-  }
-
-})
-
-app.delete('/deletePost/:postId', (req, res) => {
-  const postId = req.params.postId
-  posts.splice(postId, 1)
-  res.send('okay')
+  res.render('home', {homeStartingContent : homeStartingContent, posts : posts})
 })
 
 app.get('/about', (req, res) => {
-  res.render('about', {aboutStartingContent : aboutContent})
+  res.render('about', {aboutContent : aboutContent})
 })
 
 app.get('/contact', (req, res) => {
-  res.render('contact', {contactStartingContent : contactContent})
+  res.render('contact', {contactContent : contactContent})
 })
-
 
 app.get('/compose', (req, res) => {
   res.render('compose')
 })
 
-app.post('/compose',urlencodedParser, [
-  check('title', 'The title must be 3+ characters long').exists().isLength({min: 3}),
-  check('postBody', 'The content must be 3+ characters long').exists().isLength({min: 3})
-], (req, res) => {
-  const errors = validationResult(req)
-  if (!errors.isEmpty()){
-    const alert = errors.array()
-    res.render('compose', {alert})
-  }else {
-    let post = req.body
-    posts.push(post)
-    res.redirect('/')
+app.post('/compose',
+check('postTitle', 'The title must be at least 5 chars long').exists().isLength({min: 5}),
+check('postBody', 'The body must be at least 5 chars long').exists().isLength({min: 5}),
+(req, res) => {
+  const requestBody = req.body
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.render('compose', {errors : errors.array()})
   }
+  const post = {title : requestBody.postTitle, body : requestBody.postBody}
+  posts.push(post)
+  post.id = posts.indexOf(post)
+  res.redirect('/')
 })
 
-
-
-
-
+app.get('/post/:id', (req, res) => {
+  if (posts[req.params.id]) {
+    return res.render('post', {post : posts[req.params.id]})
+  }
+  res.sendStatus(404)
+})
 
 
 app.listen(3000, function() {
