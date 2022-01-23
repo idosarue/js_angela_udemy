@@ -5,10 +5,18 @@
 </div>
 
 <div class="box">
+    <% if(typeof(errors) != 'undefined') { %>
+        <% errors.forEach(error => { %>
+            <div class="alert alert-danger" role="alert">
+                <%= error.msg %> 
+              </div>    
+        <% }) %>
+    <% } %>
     <% items.forEach(item => { %>
         <div class="item">
             <input type="checkbox">
-            <p><%= item %></p> 
+            <p><%= item.name %></p> 
+            <%- include('./partials/deleteForm', {url : `/deleteItem/${item.id}`}) %> 
         </div>
     <% }) %>    
     <form class="item" action="/" method="post">
