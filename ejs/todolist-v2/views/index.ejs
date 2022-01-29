@@ -5,24 +5,21 @@
 </div>
 
 <div class="box">
-    <% if(typeof(errors) != 'undefined') { %>
-        <% errors.forEach(error => { %>
-            <div class="alert alert-danger" role="alert">
-                <%= error.msg %> 
-              </div>    
-        <% }) %>
-    <% } %>
     <% items.forEach(item => { %>
         <div class="item">
-            <input type="checkbox">
-            <p><%= item.name %></p> 
-            <%- include('./partials/deleteForm', {url : `/deleteItem/${item.id}`}) %> 
+            <%- include('./partials/deleteForm', {itemId : item.id, name : item.name, listName : listTitle}) %> 
         </div>
-    <% }) %>    
+    <% }) %>
     <form class="item" action="/" method="post">
-        <input type="text" name="title" placeholder="New item" autocomplete="off">
-        <button type="submit" name="list" value="<%= listTitle %>">+</button>
+        <input type="text" name="itemTitle" placeholder="New item" autocomplete="off">
+        <button type="submit" name="listName" value="<%= listTitle %>">+</button>
     </form>
+
+    <% if(typeof errorMessage !== 'undefined'  ) { %>
+        <div class="alert alert-danger" role="alert">
+            <%= errorMessage %>
+        </div>
+    <% } %>
 </div>
 
 
