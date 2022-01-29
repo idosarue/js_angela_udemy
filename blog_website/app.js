@@ -73,7 +73,6 @@ app.get('/post/:id', async(req, res) => {
   const post = await Post.findById(req.params.id)
   if(post){
     return res.render('post', {post : post})
-
   }
   res.sendStatus(404)
 })
