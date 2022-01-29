@@ -3,7 +3,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
-const { forIn } = require("lodash");
 const {check, validationResult} = require('express-validator')
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
@@ -21,11 +20,12 @@ app.use(express.static("public"));
 // Console
 const log = console.log.bind(console, 'app')
 // Posts
-const posts = []
+const Post = require('./db')
 
 
-app.get('/', (req, res) => {
-  res.render('home', {homeStartingContent : homeStartingContent, posts : posts})
+app.get('/', async(req, res) => {
+  const posts = await Post.find()
+  res.render('home', {homeStartingContent : homeStartingContent, posts : posts != 'undefined' ? posts : []})
 })
 
 app.get('/about', (req, res) => {
@@ -41,23 +41,39 @@ app.get('/compose', (req, res) => {
 })
 
 app.post('/compose',
-check('postTitle', 'The title must be at least 5 chars long').exists().isLength({min: 5}),
-check('postBody', 'The body must be at least 5 chars long').exists().isLength({min: 5}),
-(req, res) => {
+async(req, res) => {
   const requestBody = req.body
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.render('compose', {errors : errors.array()})
+  const title = requestBody.postTitle
+  const content =  requestBody.postBody
+  try {
+    const newPost = new Post({
+      title : title,
+      content : content
+    })
+    await newPost.save()
+    res.redirect('/')
+  }catch(e){
+    console.log(e)
+    const titleError = {}
+    const contentError = {}
+    for(let i in e.errors) {
+      if (i == 'title'){
+        titleError.msg = e.errors['title'].message
+      }else {
+        contentError.msg = e.errors['content'].message
+      }
+    }
+    console.log(requestBody)
+    res.render('compose', {titleError : titleError, contentError : contentError, postTitleValue : title, postContentValue : content })
   }
-  const post = {title : requestBody.postTitle, body : requestBody.postBody}
-  posts.push(post)
-  post.id = posts.indexOf(post)
-  res.redirect('/')
+
 })
 
-app.get('/post/:id', (req, res) => {
-  if (posts[req.params.id]) {
-    return res.render('post', {post : posts[req.params.id]})
+app.get('/post/:id', async(req, res) => {
+  const post = await Post.findById(req.params.id)
+  if(post){
+    return res.render('post', {post : post})
+
   }
   res.sendStatus(404)
 })
