@@ -1,10 +1,20 @@
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost:27017/secretsDB');
+// one way
+const encrypt = require('mongoose-encryption')
+const encryptOptions = require('./encryptOptions')
+
+
+require('dotenv').config()
+const secret = process.env.SECRET
 
 const userSchema = mongoose.Schema({
     email: String,
     password : String
 })
+
+if(encryptOptions.useEncrypt){
+    userSchema.plugin(encrypt, {secret : secret, encryptedFields : ['password']})
+}
 
 const User = mongoose.model('User', userSchema)
 
